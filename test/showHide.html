@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>显示和隐藏</title>
+	<link rel="stylesheet" href="../css/reset.css">
+	<style>
+	#box{
+		width: 200px;
+		/*分三种情况：
+		1.高度明确
+		2.没有高度只有padding
+		3.高度和padding都没有，靠内部元素撑开*/
+		/*height: 200px;
+		padding: 100px 0;*/
+		background: red;
+		display: none;
+		overflow: hidden;
+	}
+	.transition{
+		-o-transition: all 0.5s;
+		-ms-transition: all 0.5s;
+		-moz-transition: all 0.5s;
+		-webkit-transition: all 0.5s;
+		transition: all 0.5s;
+	}
+	.fadeOut{
+		visibility: hidden !important;
+		opacity: 0 !important;
+	}
+	.slideUpDownCollapse{
+		/*类的优先级比ID优先级低，所以添加优先级*/
+		height: 0 !important;
+		padding-top: 0 !important;
+		padding-bottom: 0 !important;
+	}
+	.slideLeftRightCollapse{
+		width: 0 !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+</style>
+</head>
+<body>
+	<button id="btn-show" class="btn">显示</button>
+	<button id="btn-hide" class="btn">隐藏</button>
+	<div id="box" >
+		<p>123</p>
+		<p>123</p>
+		<p>123</p>
+		<p>123</p>
+		<p>123</p>
+	</div>
+<button class="btn">显示2</button>
+	<script src="../js/jquery-3.3.1.js"></script>
+	<script src="../js/transition.js"></script>
+	<script src="../js/showHide.js"></script>
+	<script>
+		console.log(window.mt.transition.end);
+		console.log(window.mt.transition.isSupport);
+		var btnShow = $("#btn-show");
+		var btnHide = $("#btn-hide");
+		var $box = $("#box")
+		// js.fadeSlideLeftRight.init($box)
+		// css3.fadeSlideLeftRight.init($box);
+		// var showHide = window.mt.showHide($box,{
+		//     css3: true,
+		// 	animation: "fade"
+		// });
+		$box.showHide({
+            css3: true,
+			js: true,
+			animation: "fade"
+		});
+		btnShow.on("click",function(){
+			// js.fadeSlideLeftRight.show($box)
+            // showHide.show()
+            $box.showHide("show");
+			// silent.show($box);
+		});
+		btnHide.on("click",function(){
+			// js.fadeSlideLeftRight.hide($box)
+            // showHide.hide()
+			// silent.hide($box);
+            $box.showHide("hide");
+		});
+		$box.on("show shown hide hidden",function(e){
+			console.log(e.type);
+		});
+
+	</script>
+</body>
+</html>
